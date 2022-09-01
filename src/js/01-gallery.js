@@ -6,9 +6,9 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 console.log(galleryItems);
 
-const list = document.querySelector('.gallery');
+export const list = document.querySelector('.gallery');
 
-function createImgGallery(galleryItems) {
+export function createImgGallery(galleryItems) {
   return galleryItems
     .map(({ preview, original, description }) => {
       return `
@@ -20,7 +20,7 @@ function createImgGallery(galleryItems) {
     })
     .join('');
 }
-const cardsGalleryMarkUp = createImgGallery(galleryItems);
+export const cardsGalleryMarkUp = createImgGallery(galleryItems);
 list.insertAdjacentHTML('afterbegin', cardsGalleryMarkUp);
 
 new SimpleLightbox('.gallery a', {
