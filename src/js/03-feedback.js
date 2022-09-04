@@ -14,7 +14,7 @@ form.addEventListener('submit', onFormSubmit);
 form.addEventListener('input', throttle(onFormInput, 500));
 
 function onFormInput(event) {
-  formData[event.target.name] = event.target.value;
+ formData[event.target.name] = event.target.value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
@@ -26,11 +26,14 @@ function onFormSubmit(event) {
 
 function populateTextarea() {
     
-        const savedMessage = localStorage.getItem(STORAGE_KEY);
-        const parseMessage = JSON.parse(savedMessage);
+  let savedMessage = localStorage.getItem(STORAGE_KEY);
+  
   if (savedMessage) {
-    textarea.value = parseMessage.message;
-    input.value = parseMessage.email;
-        }
+    savedMessage = JSON.parse(savedMessage);
+    Object.entries(savedMessage).forEach(([name, value]) => {
+      formData[name] = value;
+      form.elements[name].value = value;
+    });
+    }
     } 
 
